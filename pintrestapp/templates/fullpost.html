@@ -1,0 +1,280 @@
+{%extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body{
+       
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+.postcontainer{
+    text-align: center;
+    overflow: hidden;
+}
+#imgpost{
+    height: 100%;
+    width: 100%;
+}
+
+#fullscreenbtn{
+    font-size: 17px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: rgb(246, 241, 241);
+}
+#fullscreenbtn:hover{
+    background-color: rgb(230, 227, 227);
+    color: rgb(75, 74, 74);
+}
+#mainpost{
+    height: 400px;
+    object-fit: contain;
+}
+.showdata{
+    height: 200px;
+    margin: auto;
+    width: 95%;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-y: scroll;
+    position: relative;
+    
+}
+.showdata::-webkit-scrollbar{
+    display: none;
+}
+.showdata img{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+    background: black;
+}
+.showdata img:hover{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+    background: black;
+}
+.fullpagecontainer{
+    display: none;
+    max-height: 100vh;
+    max-width: 100vh;
+    
+}
+
+#mainpostfull{
+    height: 100vh;
+    width: 100%;
+    object-fit: contain;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+}
+#backscreenbtn{
+    font-size: 15px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: rgb(251, 251, 251);
+    position: absolute;
+    text-align: center;
+    background: black;
+    border: 0.5px solid white;
+    border-radius: 10px;
+    bottom: 0;
+    left: 55%;
+}
+#backscreenbtn:hover{
+    background-color: rgb(154, 154, 154);
+    color: black;
+}
+#downloadbtn{
+    font-size: 15px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    left: 45%;
+    background: black;
+    border-radius: 10px;
+}
+#downloadbtn:hover{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+#tagbutton{
+    font-size: 17px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: rgb(155, 155, 155);
+}
+.onepostcontainer{
+    font-size: 17px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: rgb(109, 109, 109);
+}
+.onepostcontainer img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.relatedpost{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.detailcontainer{
+    padding: 20px;
+    padding-top: 40px;
+    overflow-y: scroll;
+    position: relative;
+    height: 600px;
+    background-color: black;
+}
+.detailcontainer::-webkit-scrollbar{
+    display: none;
+}
+.detailcontainer h6{
+    font-size: 17px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: rgb(233, 232, 232);
+}
+.detailcontainer p{
+    font-size: 17px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: rgb(222, 222, 222);
+    text-align: justify;
+}
+.detailcontainer small{
+    font-size: 15px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    color: rgb(220, 220, 220);
+}
+#postid2{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    color: rgb(219, 216, 216);
+}
+.commentscontainer{
+    border: 0.5px solid rgb(139, 139, 139);
+    border-radius: 5px;
+    text-align: justify;
+}
+</style>
+
+
+
+<div class="container-fluid postcontainer">
+    <div class="row" id="postid">
+        <br>
+        <br>
+        <div class="col-lg-3">
+            
+            {% for i in allpost %}
+            <div class="showdata">
+                <a href="{% url 'fullpage' i.id %}"><img src="{{ i.image.url }}" id="imgpost"></a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-6 onepostcontainer">
+            <a href="{% url 'readmore' post.id %}"><img class="img-top" src="{{post.image.url}}" id="mainpost"  alt="Card image cap" ></a>
+            <br>
+            <br>
+            <small>
+                <button class="btn" id="tagbutton">{{post.title}}</button>
+            </small>
+            <br>
+            {% if done == 1 %}
+            <a href="{% url 'like' post.id %}" class="btn btn-lg text-danger rounded-circle"><i class="fa-solid fa-heart"></i></a>
+            {% else %}
+            <a href="{% url 'like' post.id %}" class="btn btn-lg text-danger rounded-circle"><i class="fa-regular fa-heart"></i></a>
+            {% endif %}
+            {{post.likes}}
+            <br>
+            <br>
+            <button type="button" class="btn btn-success btn-lg" onclick='copyText1("{{post.image.url}}","{{post.title}}")'>Download Image</button>
+            <br>
+            <br>
+            <!-- <a href="/tagsearch/{{post.tag.id}}">{{post.tag}}</a> -->
+            <!-- <button name="Anime" type="button">anime</button>
+             -->
+        </div>
+        <div class="col-lg-3 detailcontainer">
+            <h6>Post Name :- {{post.title}}</h6>
+            <button class="btn" id="tagbutton">{{post.tag}}</button>
+            <br>
+            <p>{{post.desc}}</p>
+            <br>
+            <small>
+                {{post.uploadby}}
+            </small>
+            <br>
+           
+            <button type="button" class="btn btn-dark btn-lg" id="fullscreenbtn">Fullscreen Preview</button>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row" id="postid2">
+            <h6>Related Post</h6>
+            <div class="col-lg-12 relatedpost">
+                {% for i in tagimage %}
+                <div class="showdata">
+                    <a href="{% url 'fullpage' i.id %}"><img class="img-top" src="{{i.image.url}}" id="imgpost" alt="Card image cap" ></a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+        
+        
+    </div>
+    <div class="fullpagecontainer" id="fullpagecontainer">
+        <img class="img-top" src="{{post.image.url}}" id="mainpostfull" alt="Card image cap">
+        <a href=""><button type="button" class="btn btn-dark btn-lg" id="backscreenbtn">Back</a>
+        <button type="button" class="btn btn-dark btn-lg" id="downloadbtn" onclick='copyText1("{{post.image.url}}","{{post.title}}")'>Download Image</button>
+
+    </div>
+</div>
+
+
+<script>
+    document.getElementById("fullscreenbtn").addEventListener("click",fullpage);
+    function fullpage(){
+        container = document.getElementById("postid")
+        container.style.display = "none";
+        container1 = document.getElementById("postid2")
+        container1.style.display = "none";
+        newcontainer = document.getElementById("fullpagecontainer")
+        newcontainer.style.display = "block";
+    }
+        image = document.getElementById("mainpostfull")
+        isrc = image.src;
+
+            function copyText1(url, title) {
+              let imgpath = url;
+              let filename = title;
+          
+              if (saveAs(imgpath, filename)) {
+                alert("Pin Downloaded");
+              }
+            }
+            function getFileName(str) {
+              return str.substring(str.lastIndexOf("/") + 1);
+            }
+</script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
+            integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+        </script>
+
+{% endblock %}

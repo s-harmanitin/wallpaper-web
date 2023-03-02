@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<style>
+    @media screen and (min-width:320px) and (max-width: 520px){
+        
+        .teocontainer{
+            width: 40%;
+            margin: auto;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 500;
+            color: rgb(46, 45, 45);
+            text-align: center;
+        }
+        .teocontainer h6{
+            font-size: 0.7rem;
+        }
+        .teocontainer p{
+            font-size: 0.5rem;
+        }
+        .modcontainer{
+            display: flex;
+            border: 0.5px solid rgb(182, 181, 181);
+            border-radius: 10px;
+            width: 95%;
+            margin: auto;
+            margin-top: 70px;
+        }
+        .onecontainer{
+            width: 60%;
+        }
+        #sign{
+            font-size: 0.4rem;
+        }
+        .modal-body{
+            display: flex;
+            width: 95%;
+            margin: auto;
+        }
+        .modaloneside{
+            width: 50%;
+        }
+        .modalotherside{
+            width: 50%;
+        }
+        .modalotherside form{
+            width: 100%;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 500;
+            color: rgb(46, 45, 45);
+            
+        }
+        .modalotherside label{
+            font-size: 0.8rem;
+        }
+        .modalotherside input{
+            font-size: 0.5rem;
+        }
+        .modalotherside button{
+            font-size: 0.8rem;
+        }
+        #subbutton{
+            font-size: 0.5rem;
+        }
+        .modal-title{
+            font-size: 0.8rem;
+        }
+        #closebutton{
+            font-size: 0.5rem;
+        }
+        .btn-close{
+            font-size: 0.5rem;
+        }
+        
+
+    }
+    @media screen and (min-width:1000px) and (max-width:3000px){
+
+    
+    body{
+        background-image: url("{% static 'social (2).jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        object-fit: cover;
+        backdrop-filter: blur(5px);
+        height: 710px;
+        
+    }
+
+    .modal-body{
+        display: flex;
+        
+    }
+    .modaloneside{
+        width: 50%;
+        align-items: flex-end;
+        text-align: center;
+        height: 100%;
+    }
+    .modaloneside img{
+        height: 200px;
+    }
+    .modalotherside{
+        width: 50%;
+        text-align: justify;
+    }
+    #modalbutton{
+        width: 10%;
+        text-align: center;
+        margin-top: 630px;
+        margin-left: 750px;
+    }
+    #modalbutton:hover{
+        background-color: white;
+        color: rgb(10, 175, 240);
+    }
+    .modal{
+        font-family: 'Kanit', sans-serif;
+        font-weight: 500;
+        color: rgb(46, 45, 45);
+    }
+    .modcontainer{
+        display: flex;
+        height: 338px;
+        width: 800px;
+        margin-top: 120px;
+        border-radius: 10px;
+        border: 1px solid black;
+    }
+    .onecontainer{
+        width: 65%;
+        height: 100%;  
+    }
+    .onecontainer img{
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover; 
+        object-fit: cover;
+        border-radius: 10px;
+        margin-left: -20px;
+        
+    }
+    .teocontainer{
+        width: 35%;
+        justify-content: center;
+        text-align: center;
+        place-content: center;
+        align-items: center;
+        padding-top: 130px;
+        font-family: 'Kanit', sans-serif;
+        font-weight: 500;
+        color: rgb(46, 45, 45);  
+    }
+    .teocontainer section h6{
+        font-size: 20px;
+    }
+    .teocontainer button{
+        text-align: center;
+    }
+    .row{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    #sign{
+        width: 180px;
+    }
+}
+</style>
+
+<div class="container-fluid backcont">
+    <div class="row">
+        <!-- Button trigger modal -->
+    
+
+
+    <div class="modcontainer">
+        <div class="onecontainer">
+            <img src="{% static 'logpo.jpg' %}" class="img-fluid">
+        </div>
+        <div class="teocontainer">
+            <section>
+                <h6>Welcome to <span>Anime</span> wallpaper</h6>
+                <h6>Sign Up with Us</h6>
+                <p>Let's start your journey with us</p>
+            </section>
+            <button type="button" class="btn btn-primary" id="sign" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Sign In
+            </button></div>
+    </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Sign In</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="modaloneside">
+                <img src="{% static 'lo.jpg' %}"  class="img-fluid" height="200px">
+            </div>
+            <div class="modalotherside">
+                <form  enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    <label for="#loginform">Username</label>
+                    <input type="text" class="form-control" id="loginform" placeholder="Username" name='username'>
+                    
+                    <label for="#loginform">Password</label>
+                    <input type="password" class="form-control" id="loginform" placeholder="Password" name='password'>
+                    <br>
+                    <button type="submit" class="btn btn-primary" id="subbutton">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closebutton">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

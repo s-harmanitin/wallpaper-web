@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    @media screen and (min-width:320px) and (max-width:720px) {
+        body{
+            background-image: url("{% static 'social (1).jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        #modalbutton{
+            width: 6rem;
+            text-align: center;
+            top: 73%;
+            position: absolute;
+            font-size: 0.7rem;
+            left: 0;
+            
+            
+        }
+    }
+    @media screen and (min-width:720px) and (max-width:7020px) {
+        
+    
+    body{
+        background-image: url("{% static 'social (1).jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        object-fit: cover;
+    }
+    .modal-body{
+        display: flex;
+        
+    }
+    .modaloneside{
+        width: 50%;
+        align-items: flex-end;
+        text-align: center;
+        height: 100%;
+    }
+    .modalotherside{
+        width: 50%;
+    }
+    #modalbutton{
+        width: 10%;
+        text-align: center;
+        margin-top: 610px;
+        margin-left: 750px;
+    }
+    #modalbutton:hover{
+        background-color: white;
+        color: rgb(10, 175, 240);
+    }
+    .modal{
+        font-family: 'Kanit', sans-serif;
+        font-weight: 500;
+        color: rgb(46, 45, 45);
+    }
+}
+    
+</style>
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container-fluid">
+        <div class="row">
+            <button type="button" id="modalbutton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add POST
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add  Post</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="modaloneside">
+                            <img src="{% static 'mod.jpg' %}" height="200px">
+                        </div>
+                        <div class="modalotherside">
+                            {{ form.title | as_crispy_field }}
+                            {{ form.image | as_crispy_field }}
+                            {{ form.uploadby  | as_crispy_field }} 
+                            {{ form.tag | as_crispy_field }}
+                            {{ form.desc | as_crispy_field }}
+                            <div class="likes" id="id_likes">
+                                {{ form.likes | as_crispy_field}}
+                            </div>
+                            
+
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.getElementById("id_uploadby")
+    let username = '{{user}}'
+    document.getElementById("id_uploadby").value = username
+    
+
+    document.getElementById("id_likes").style.display ="none"
+
+</script>
+
+
+{% endblock %}

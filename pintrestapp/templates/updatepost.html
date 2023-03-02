@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    @media screen and (min-width:320px) and (max-width:720px) {
+        .container{
+            height: 100%;
+            width: 100%;
+            font-size: 0.9rem;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 500;
+            color: rgb(109, 109, 109);
+        }
+        .container img{
+            height: 50%;
+            width: 100%;
+            object-fit: cover;
+        } 
+        .container-fluid{
+            border: 0.5px solid rgb(140, 139, 139);
+        }
+    }
+    @media screen and (min-width:720px) and (max-width:7020px) {
+        .container{
+            height: 100%;
+            width: 100%;
+            font-size: 17px;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 500;
+            color: rgb(109, 109, 109);
+        }
+        .container img{
+            height: 50%;
+            width: 100%;
+            object-fit: cover;
+        } 
+    }
+</style>
+
+<div class="container">
+    <div class="container-fluid">
+        <img class="img-top" src="{{post.image.url}}" id="mainpostfull" alt="Card image cap" height="">
+        <div class="showbody">
+            <h6>{{post.tag}}</h6>
+            <small>
+                <button class="btn" id="tagbutton">{{post.title}}</button>
+            </small>
+            <p>{{post.desc}}</p>
+            <small>
+                {{post.uploadby}}
+            </small>
+            <br>
+            
+            {% if user.username == post.uploadby or user.is_superuser %}
+                
+            <a href="{% url 'update' post.id %}">
+                <button type="button" class="btn btn-outline-primary" >Update Post</button>
+            </a>
+            <a href="{% url 'delete' post.id %}">
+                <button type="button" class="btn btn-outline-danger" >Delete Post</button>
+            </a>
+              
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <a href="{% url 'fullpage' post.id %}">
+        <button type="button" class="btn btn-outline-danger" >Back</button>
+    </a>
+</div>
+
+
+{% endblock %}

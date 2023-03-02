@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    @media screen and (min-width:320px) and (max-width:520px){
+        .imgcontainer{
+           
+            width: 80%;
+            margin: auto;
+        }
+        .imgcontainer img{
+            height: 300px;
+        }
+        .datacontainer{
+            width: 80%;
+            margin: auto;
+        }
+        .datacontainer form{
+            font-family: 'Nunito', sans-serif;
+            font-weight: 1000;
+            color: rgb(97, 97, 97);
+        }
+    }
+    @media screen and (min-width:1000px) and (max-width:3000px){
+
+    
+    body{
+        background-image: url("{% static 'social (2).jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        object-fit: cover;
+        backdrop-filter: blur(5px);
+        
+    }
+    .container{
+        height: 650px;
+        width: 100%;
+        margin: auto;
+        padding: auto;
+        display: flex;
+        border: 0.5px solid rgb(154, 154, 154);
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        background-color: white;
+    }
+    .datacontainer{
+        width: 50%;
+        height: 500px;
+        margin: auto;
+        border-bottom: 0.5px solid black;
+        display: block;
+        
+    }
+    .datacontainer form{
+        width: 60%;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 1000;
+        color: rgb(97, 97, 97);
+        
+    }
+    .imgcontainer{
+        width: 50%;
+        height: 600px;
+        margin: auto;
+        display: block;
+        
+    }
+    .imgcontainer img{
+        height: 100%;
+        width: 100%;
+    }
+    form h5{
+        text-align: center;
+        font-weight: 700;
+        font-size: 25px;
+        color: #0d6efd;
+    }
+}
+
+</style>
+<div class="container">
+    <div class="imgcontainer">
+        <img src="{% static 'regist.jpg' %}">
+    </div>
+    <div class="datacontainer">
+            <form id="form" action="/register" method = "post">
+                {% csrf_token %}
+              <h5>Sign Up</h5>
+              <br>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="form-control" name="username" placeholder="Enter Username">
+                <br>
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="form-control" name="email" placeholder="Enter Email">
+                <br>
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="form-control" name="password" placeholder="Enter Password">
+                <br>
+                <label for="password">Confirm Password</label>
+                <input type="password" class="form-control" id="form-control" name="confirmpassword" placeholder="Confirm Password">
+                <br>
+                
+                <button type="submit" id="button" class=" btn btn-primary">Sign In</button>
+                <br>
+                Already have a account?    &nbsp;<a class="btn btn-primary" href="{% url 'login' %}">login</a>
+                <br>
+                {% if messages %}
+                {% for msg in messages %}
+                <div class="container-modal">
+                  <hr>
+                  {{msg}}
+                  <hr>
+                </div>
+                
+                {% endfor %}
+                {% endif %}
+            </form>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+<!-- <div class="containerone">
+    <form id="form" action="/register" method = "post">
+        {% csrf_token %}
+      <h5>Sign Up</h5>
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="form-control" name="username" placeholder="Enter Username">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="form-control" name="email" placeholder="Enter Email">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="form-control" name="password" placeholder="Enter Password">
+        <label for="password">Confirm Password</label>
+        <input type="password" class="form-control" id="form-control" name="confirmpassword" placeholder="Confirm Password">
+        <br>
+        <button type="submit" id="button" class=" btn btn-danger">Submit</button>
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="container-modal">
+          <hr>
+          {{msg}}
+          <hr>
+        </div>
+        
+        {% endfor %}
+        {% endif %}
+    </form>
+    @media screen and (min-width:320px) and (max-width:520px){
+        
+        .container{
+            height: 100%;
+            width: 100%;
+        }
+        .containerimg img{
+            height: 400px;
+        }
+        label{
+            padding-top: 20px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 1000;
+            color: rgb(97, 97, 97);
+        }
+        .containerone{
+            padding-top: 20px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 1000;
+            color: rgb(97, 97, 97);
+            
+        }
+    }
+    
+    @media  screen and (min-width: 1000px) and (max-width: 3000px) {
+        
+      
+    .containerimg{
+        width: 50%;
+        position: relative;
+        text-align: center;
+        height: 500px;
+        object-fit: cover;
+    }
+    .containerimg img{
+        text-align: center;
+        margin: auto;
+        height: 500px;
+        border-radius: 10px;
+        width: 100%;
+        background: white;
+        object-fit: cover;
+    }
+    .containerone{
+        width: 30%;
+        height: 520px;
+        background: transparent;
+       
+    }
+    .containerone form{
+        width: 100%;
+        
+        
+        
+    }
+    body{
+        background-image: url("{% static 'backg.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 750px;
+        backdrop-filter: blur(5px);
+    }
+    .container{
+        justify-content: center;
+        place-items: center;
+        display: flex;
+        border-radius: 5px;
+        border-bottom: 1px solid rgb(64, 64, 64);
+        background-color: rgb(255, 255, 255);
+        width: 70%;
+        margin: auto;
+        margin-top: 70px;
+    }
+    #form{
+        padding: 10px;
+    }
+    #form-control{
+        position: inherit;
+        background-color: rgb(245, 245, 245); 
+        
+    }
+    #form-control:focus{
+        background-color: rgb(255, 255, 255);
+        color: rgb(52, 51, 51);
+        font-weight: 1000;
+        font-family: 'Nunito', sans-serif;
+        outline: none;
+        border-color: rgb(234, 230, 230);
+        box-shadow: 0 0 10px rgb(255, 215, 0);
+    }
+    #button{
+        background-color: rgb(255, 215, 0);
+        border: none;
+        align-items: center;
+        font-weight: 1000;
+        font-family: 'Nunito', sans-serif;
+        margin-left: 120px;
+    }
+    #button:hover{
+        background-color: white;
+        color: rgb(255, 215, 0);
+        border: 2px solid rgb(255, 215, 0);
+        font-weight: 1000;
+        font-family: 'Nunito', sans-serif;
+    }
+    label{
+        padding-top: 20px;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 1000;
+        color: rgb(97, 97, 97);
+    }
+    h5{
+        /* background-color: white; */
+        color: rgb(255, 215, 0);
+        font-weight: 1000;
+        font-family: 'Nunito', sans-serif;
+        font-size: 25px;  
+    }
+    form h5{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+</div> -->

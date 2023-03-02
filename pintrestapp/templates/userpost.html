@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    @media screen and (min-width:320px) and (max-width:720px) {
+        .row{
+            display: flex;
+            width: 100%;
+            margin: auto;
+            
+            gap: 20px;
+        }
+        .card{
+            background-color: rgb(243, 242, 242);
+            font-size: 0.7rem;
+        }
+        .card-body h5{
+            font-size: 0.9rem;
+        }
+        .btn-01{
+            font-size: 0.4rem;
+        }
+        .userrow h5{
+            font-size: 1.0rem;
+        }
+    }
+    @media screen and (min-width:720px) and (max-width:7020px) {
+        
+    
+    .row{
+        display: flex;
+        width: 80%;
+        margin: auto;
+        padding: 10px;
+    }
+    .card{
+        background-color: rgb(243, 242, 242);
+        
+    }
+    
+}
+</style>
+<div class="container new_sec">
+    <div class="row userrow">
+      <h5>{{user.username| title}} 's Posts </h5>
+    </div>
+      <div class="row">
+        
+
+              {% for i in form_a %}
+             
+            
+          
+              <div class="col-lg-4">
+                  <div class="card">
+                    <img class="card-img-top" src="{{i.image.url}}" alt="Card image cap" height="200px" width="150px" >
+                    <div class="card-body">
+                      <h5 class="card-title">{{i.heading | title}}</h5>
+                      <p class="card-text">{{i.desc | title|safe|striptags|truncatechars:100}}</p>
+                      <a href="{% url 'readmore' i.id %}" class="btn btn-danger btn-01">show More</a>
+                    </div>
+                  </div>
+                </div>
+                
+                {% endfor %}
+      </div>
+      <br>
+      <a href="{% url 'home' %}">
+        <button type="button" class="btn btn-outline-danger" >Back</button>
+      </a>
+    </div>
+
+
+
+
+{% endblock %}
